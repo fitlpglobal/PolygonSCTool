@@ -4,6 +4,9 @@ import { Geist } from "next/font/google";
 import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
+import "@radix-ui/themes/styles.css";
+
+import { Theme } from "@radix-ui/themes";
 
 const geist = Geist({
   subsets: ["latin"],
@@ -11,9 +14,11 @@ const geist = Geist({
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   return (
-    <div className={geist.className}>
-      <Component {...pageProps} />
-    </div>
+    <Theme>
+      <div className={geist.className}>
+        <Component {...pageProps} />
+      </div>
+    </Theme>
   );
 };
 
