@@ -238,19 +238,18 @@ const SmartContractDeployer: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">Smart Contract Deployer</h1>
-          <p className="text-gray-600">Upload, compile, and deploy Solidity via MetaMask (current network)</p>
-        </div>
+    <div className="container mx-auto px-4 py-8">
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-bold text-black mb-2">Smart Contract Deployer</h1>
+        <p className="text-lg" style={{ color: 'var(--primary-violet)' }}>Upload, compile, and deploy Solidity via MetaMask (current network)</p>
+      </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
-          <div className="bg-white rounded-xl shadow-lg p-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
-              <UploadCloud className="mr-2 text-blue-600" />
-              Solidity Source
-            </h2>
+      <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+        <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200">
+          <h2 className="text-2xl font-semibold text-black mb-6 flex items-center">
+            <UploadCloud className="mr-2" style={{ color: 'var(--primary-violet)' }} />
+            Solidity Source
+          </h2>
 
             <div className="space-y-4">
               <input type="file" accept=".sol" onChange={handleFileUpload} />
@@ -259,134 +258,156 @@ const SmartContractDeployer: React.FC = () => {
                 onChange={(e) => setSource(e.target.value)}
                 rows={18}
                 placeholder="Paste or upload Solidity source (.sol)."
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all resize-y"
+                className="w-full px-4 py-2 border border-black rounded-lg transition-all resize-y"
+                onFocus={(e) => {
+                  e.target.style.borderColor = 'var(--primary-violet)';
+                  e.target.style.boxShadow = '0 0 0 2px rgba(122, 40, 203, 0.2)';
+                }}
+                onBlur={(e) => {
+                  e.target.style.borderColor = 'black';
+                  e.target.style.boxShadow = 'none';
+                }}
               />
 
               <button
                 onClick={handleCompile}
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-200 shadow-lg"
+                className="w-full text-white py-3 px-6 rounded-lg font-semibold transform hover:scale-105 transition-all duration-200 shadow-lg"
+                style={{ background: 'var(--primary-violet)' }}
               >
                 Compile
               </button>
             </div>
           </div>
 
-          <div className="bg-white rounded-xl shadow-lg p-8">
-            <h2 className="text-2xl font-semibold text-gray-800 mb-6 flex items-center">
-              <PlayCircle className="mr-2 text-purple-600" />
-              Deploy
-            </h2>
+        <div className="bg-white rounded-xl shadow-lg p-8 border border-gray-200">
+          <h2 className="text-2xl font-semibold text-black mb-6 flex items-center">
+            <PlayCircle className="mr-2" style={{ color: 'var(--primary-violet)' }} />
+            Deploy
+          </h2>
 
             <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Constructor Args (JSON array)</label>
-                <input
-                  type="text"
-                  placeholder='["Name","SYM",1000]'
-                  value={constructorArgs}
-                  onChange={(e) => setConstructorArgs(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                />
-              </div>
+            <div>
+              <label className="block text-sm font-medium text-black mb-2">Constructor Args (JSON array)</label>
+              <input
+                type="text"
+                placeholder='["Name","SYM",1000]'
+                value={constructorArgs}
+                onChange={(e) => setConstructorArgs(e.target.value)}
+                className="w-full px-4 py-2 border border-black rounded-lg transition-all"
+                onFocus={(e) => {
+                  e.target.style.borderColor = 'var(--primary-violet)';
+                  e.target.style.boxShadow = '0 0 0 2px rgba(122, 40, 203, 0.2)';
+                }}
+                onBlur={(e) => {
+                  e.target.style.borderColor = 'black';
+                  e.target.style.boxShadow = 'none';
+                }}
+              />
+            </div>
 
-              <button
-                onClick={connectWallet}
-                className="w-full bg-gray-900 text-white py-3 px-6 rounded-lg font-semibold hover:bg-black transition-all flex items-center justify-center gap-2"
-              >
-                <Wallet className="w-5 h-5" /> Connect MetaMask
-              </button>
+            <button
+              onClick={connectWallet}
+              className="w-full text-white py-3 px-6 rounded-lg font-semibold transition-all flex items-center justify-center gap-2"
+              style={{ background: 'var(--primary-violet)' }}
+            >
+              <Wallet className="w-5 h-5" /> Connect MetaMask
+            </button>
 
               {/* Manual refresh button for debugging */}
-              {account && (
-                <button
-                  onClick={refreshWalletInfo}
-                  className="w-full bg-blue-600 text-white py-2 px-4 rounded-lg text-sm font-medium hover:bg-blue-700 transition-all"
-                >
-                  🔄 Refresh Wallet Info
-                </button>
-              )}
+            {account && (
+              <button
+                onClick={refreshWalletInfo}
+                className="w-full bg-gray-100 text-black py-2 px-4 rounded-lg text-sm font-medium hover:bg-gray-200 transition-all border border-black"
+              >
+                🔄 Refresh Wallet Info
+              </button>
+            )}
 
-              <div className="text-sm text-gray-700 space-y-2">
-                <div><strong>Account:</strong> {account ?? '—'}</div>
-                <div>
-                  <strong>Chain:</strong> {getChainName(chainId)}
-                  <div className="text-xs text-gray-500">ID: {formatChainId(chainId)}</div>
+            <div className="text-sm text-black space-y-2">
+              <div><strong>Account:</strong> {account ?? '—'}</div>
+              <div>
+                <strong>Chain:</strong> {getChainName(chainId)}
+                <div className="text-xs text-gray-600">ID: {formatChainId(chainId)}</div>
+              </div>
+              {chainId && CHAIN_INFO[chainId]?.blockExplorer && (
+                <div className="text-xs">
+                  <a 
+                    href={CHAIN_INFO[chainId]!.blockExplorer} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    style={{ color: 'var(--primary-violet)' }}
+                    className="hover:underline"
+                  >
+                    View on {getChainName(chainId)} Explorer
+                  </a>
                 </div>
-                {chainId && CHAIN_INFO[chainId]?.blockExplorer && (
-                  <div className="text-xs">
-                    <a 
-                      href={CHAIN_INFO[chainId]!.blockExplorer} 
-                      target="_blank" 
-                      rel="noopener noreferrer"
-                      className="text-blue-600 hover:underline"
-                    >
-                      View on {getChainName(chainId)} Explorer
-                    </a>
-                  </div>
-                )}
+              )}
               </div>
 
               {/* Chain switching options */}
-              {account && (
-                <div className="border-t pt-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-3">Switch Network:</label>
+            {account && (
+              <div className="border-t border-black pt-4">
+                <label className="block text-sm font-medium text-black mb-3">Switch Network:</label>
                   
                   {/* Recommended Testnets */}
-                  <div className="mb-3">
-                    <div className="text-xs font-medium text-gray-600 mb-2">🧪 Recommended Testnets</div>
-                    <div className="grid grid-cols-1 gap-2">
-                      <button
-                        onClick={() => switchToChain('0x13882')}
-                        disabled={chainId === '0x13882'}
-                        className={`text-sm px-4 py-3 rounded-lg border-2 transition-all ${
-                          chainId === '0x13882'
-                            ? 'bg-green-100 border-green-300 text-green-800 cursor-not-allowed'
-                            : 'bg-blue-50 border-blue-200 text-blue-700 hover:bg-blue-100 hover:border-blue-300'
-                        }`}
-                      >
-                        <div className="font-medium">Amoy Testnet (POL)</div>
-                        <div className="text-xs opacity-75">Chain ID: 80002 • Free POL tokens</div>
-                        {chainId === '0x13882' && <div className="text-xs mt-1">✅ Currently Connected</div>}
-                        {chainId !== '0x13882' && <div className="text-xs mt-1">👆 Click to add & switch</div>}
-                      </button>
+                <div className="mb-3">
+                  <div className="text-xs font-medium text-black mb-2">🧪 Recommended Testnets</div>
+                  <div className="grid grid-cols-1 gap-2">
+                    <button
+                      onClick={() => switchToChain('0x13882')}
+                      disabled={chainId === '0x13882'}
+                      className={`text-sm px-4 py-3 rounded-lg border-2 transition-all ${
+                        chainId === '0x13882'
+                          ? 'bg-green-100 border-green-600 text-green-800 cursor-not-allowed'
+                          : 'bg-white border-black text-black hover:bg-gray-50'
+                      }`}
+                      style={chainId !== '0x13882' ? { borderColor: 'var(--primary-violet)' } : {}}
+                    >
+                      <div className="font-medium">Amoy Testnet (POL)</div>
+                      <div className="text-xs opacity-75">Chain ID: 80002 • Free POL tokens</div>
+                      {chainId === '0x13882' && <div className="text-xs mt-1">✅ Currently Connected</div>}
+                      {chainId !== '0x13882' && <div className="text-xs mt-1">👆 Click to add & switch</div>}
+                    </button>
                       
-                      <button
-                        onClick={() => switchToChain('0xaa36a7')}
-                        disabled={chainId === '0xaa36a7'}
-                        className={`text-sm px-4 py-3 rounded-lg border-2 transition-all ${
-                          chainId === '0xaa36a7'
-                            ? 'bg-green-100 border-green-300 text-green-800 cursor-not-allowed'
-                            : 'bg-gray-50 border-gray-200 text-gray-700 hover:bg-gray-100 hover:border-gray-300'
-                        }`}
-                      >
-                        <div className="font-medium">Sepolia Testnet (ETH)</div>
-                        <div className="text-xs opacity-75">Chain ID: 11155111</div>
-                        {chainId === '0xaa36a7' && <div className="text-xs mt-1">✅ Currently Connected</div>}
-                      </button>
+                    <button
+                      onClick={() => switchToChain('0xaa36a7')}
+                      disabled={chainId === '0xaa36a7'}
+                      className={`text-sm px-4 py-3 rounded-lg border-2 transition-all ${
+                        chainId === '0xaa36a7'
+                          ? 'bg-green-100 border-green-600 text-green-800 cursor-not-allowed'
+                          : 'bg-white border-black text-black hover:bg-gray-50'
+                      }`}
+                      style={chainId !== '0xaa36a7' ? { borderColor: 'var(--primary-violet)' } : {}}
+                    >
+                      <div className="font-medium">Sepolia Testnet (ETH)</div>
+                      <div className="text-xs opacity-75">Chain ID: 11155111</div>
+                      {chainId === '0xaa36a7' && <div className="text-xs mt-1">✅ Currently Connected</div>}
+                    </button>
                     </div>
                     
                     {/* Testnet tokens info */}
-                    {chainId === '0x13882' && (
-                      <div className="mt-2 p-2 bg-blue-50 border border-blue-200 rounded text-xs">
-                        <div className="font-medium text-blue-800 mb-1">🪙 Need POL tokens?</div>
-                        <div className="text-blue-700">
-                          Get free POL tokens from the{' '}
-                          <a 
-                            href="https://faucet.polygon.technology/" 
-                            target="_blank" 
-                            rel="noopener noreferrer"
-                            className="underline hover:no-underline"
-                          >
-                            Polygon Faucet
-                          </a>
-                        </div>
+                  {chainId === '0x13882' && (
+                    <div className="mt-2 p-2 bg-gray-50 border border-black rounded text-xs">
+                      <div className="font-medium text-black mb-1">🪙 Need POL tokens?</div>
+                      <div className="text-black">
+                        Get free POL tokens from the{' '}
+                        <a 
+                          href="https://faucet.polygon.technology/" 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="underline hover:no-underline"
+                          style={{ color: 'var(--primary-violet)' }}
+                        >
+                          Polygon Faucet
+                        </a>
                       </div>
-                    )}
+                    </div>
+                  )}
                   </div>
 
                   {/* Mainnets */}
-                  <div>
-                    <div className="text-xs font-medium text-gray-600 mb-2">🔴 Mainnets (Real Money!)</div>
+                <div>
+                  <div className="text-xs font-medium text-black mb-2">🔴 Mainnets (Real Money!)</div>
                     <div className="grid grid-cols-2 gap-2">
                       {[
                         { id: '0x1', name: 'Ethereum' },
@@ -413,19 +434,20 @@ const SmartContractDeployer: React.FC = () => {
                 </div>
               )}
 
-              <button
-                onClick={handleDeploy}
-                disabled={!compiled || !account}
-                className="w-full bg-gradient-to-r from-green-600 to-emerald-600 disabled:from-gray-400 disabled:to-gray-400 text-white py-3 px-6 rounded-lg font-semibold hover:from-green-700 hover:to-emerald-700 transition-all"
-              >
-                Deploy Contract {account ? `on ${getChainName(chainId)}` : '(Connect Wallet First)'}
-              </button>
+            <button
+              onClick={handleDeploy}
+              disabled={!compiled || !account}
+              className="w-full text-white py-3 px-6 rounded-lg font-semibold transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              style={{ background: !compiled || !account ? '#666666' : 'var(--primary-violet)' }}
+            >
+              Deploy Contract {account ? `on ${getChainName(chainId)}` : '(Connect Wallet First)'}
+            </button>
 
               {/* Deployment warnings */}
-              {account && chainId && (
-                <div className="text-sm">
-                  {isMainnet(chainId) && (
-                    <div className="flex items-start gap-2 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
+            {account && chainId && (
+              <div className="text-sm">
+                {isMainnet(chainId) && (
+                  <div className="flex items-start gap-2 p-3 bg-yellow-50 border border-yellow-400 rounded-lg">
                       <AlertTriangle className="w-4 h-4 text-yellow-600 mt-0.5 flex-shrink-0" />
                       <div className="text-yellow-800">
                         <strong>Mainnet Deployment:</strong> You're about to deploy on {getChainName(chainId)}. 
@@ -448,7 +470,7 @@ const SmartContractDeployer: React.FC = () => {
 
               {/* Deployed contract info */}
               {deployedAddress && (
-                <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
+              <div className="p-4 bg-green-50 border border-green-400 rounded-lg">
                   <h4 className="font-semibold text-green-800 mb-2">Contract Deployed Successfully! 🎉</h4>
                   <div className="text-sm text-green-700 space-y-1">
                     <div><strong>Address:</strong> <code className="bg-white px-2 py-1 rounded">{deployedAddress}</code></div>
@@ -469,18 +491,17 @@ const SmartContractDeployer: React.FC = () => {
                 </div>
               )}
 
-              <div>
-                <div className="text-sm text-gray-600"><strong>Status:</strong> {status}</div>
-                {error && (
-                  <pre className="mt-2 text-sm text-red-700 bg-red-50 p-3 rounded">{error}</pre>
-                )}
-                {compiled && (
-                  <div className="mt-3 text-sm text-gray-700">
-                    <div><strong>ABI length:</strong> {(compiled.abi as any[]).length}</div>
-                    <div><strong>Bytecode length:</strong> {compiled.bytecode.length}</div>
-                  </div>
-                )}
-              </div>
+            <div>
+              <div className="text-sm text-black"><strong>Status:</strong> {status}</div>
+              {error && (
+                <pre className="mt-2 text-sm text-red-700 bg-red-50 p-3 rounded border border-red-200">{error}</pre>
+              )}
+              {compiled && (
+                <div className="mt-3 text-sm text-black">
+                  <div><strong>ABI length:</strong> {(compiled.abi as any[]).length}</div>
+                  <div><strong>Bytecode length:</strong> {compiled.bytecode.length}</div>
+                </div>
+              )}
             </div>
           </div>
         </div>

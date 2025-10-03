@@ -52,23 +52,21 @@ const CardModule: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100">
-      <div className="container mx-auto px-4 py-8">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-800 mb-2">Loyalty Card Creator</h1>
-          <p className="text-gray-600">Design and deploy your loyalty card collection</p>
-        </div>
+    <div className="container mx-auto px-4 py-8">
+      <div className="text-center mb-8">
+        <h1 className="text-4xl font-bold mb-2" style={{ color: 'var(--english-violet)' }}>Loyalty Card Creator</h1>
+        <p className="text-lg" style={{ color: 'var(--french-violet)' }}>Design and deploy your loyalty card collection</p>
+      </div>
 
-        <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
-          <CardForm
-            formData={formData}
-            onInputChange={handleInputChange}
-            onFileChange={handleFileChange}
-            onSubmit={handleSubmit}
-          />
+      <div className="grid lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
+        <CardForm
+          formData={formData}
+          onInputChange={handleInputChange}
+          onFileChange={handleFileChange}
+          onSubmit={handleSubmit}
+        />
 
-          <CardPreview formData={formData} imagePreview={imagePreview} />
-        </div>
+        <CardPreview formData={formData} imagePreview={imagePreview} />
       </div>
     </div>
   );

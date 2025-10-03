@@ -1,9 +1,10 @@
-import dynamic from "next/dynamic";
-import Link from "next/link";
+import React from 'react';
+import dynamic from 'next/dynamic';
+import Link from 'next/link';
 
-const CardModule = dynamic(() => import("~/modules/card"), { ssr: false });
+const NFTsModule = dynamic(() => import('~/modules/nfts'), { ssr: false });
 
-export default function Home() {
+export default function NFTsPage() {
   return (
     <div className="min-h-screen" style={{ background: 'var(--bg-secondary)' }}>
       {/* Navigation Header */}
@@ -14,13 +15,13 @@ export default function Home() {
             <div className="flex space-x-4">
               <Link 
                 href="/" 
-                className="px-3 py-2 text-sm font-medium text-white border-b-2 border-transparent" style={{ background: 'var(--primary-violet)' }}
+                className="px-3 py-2 text-sm font-medium text-black hover:text-white hover:bg-gray-100 transition-colors"
               >
                 Card Creator
               </Link>
               <Link 
                 href="/nfts" 
-                className="px-3 py-2 text-sm font-medium text-black hover:text-white hover:bg-gray-100 transition-colors"
+                className="px-3 py-2 text-sm font-medium text-white border-b-2 border-transparent" style={{ background: 'var(--primary-violet)' }}
               >
                 NFT Collection
               </Link>
@@ -35,7 +36,7 @@ export default function Home() {
         </div>
       </nav>
       
-      <CardModule />
+      <NFTsModule />
     </div>
   );
 }

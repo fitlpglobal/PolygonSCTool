@@ -4,3 +4,26 @@
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
+
+/* Simplified Brand Color Palette */
+:root {
+  /* Primary Colors */
+  --primary-violet: #7a28cb;
+  --primary-white: #ffffff;
+  --primary-black: #000000;
+  
+  /* Variations */
+  --primary-violet-light: rgba(122, 40, 203, 0.1);
+  --primary-violet-medium: rgba(122, 40, 203, 0.5);
+  --primary-violet-dark: #5a1e96;
+  
+  /* Text Colors */
+  --text-primary: #000000;
+  --text-secondary: #666666;
+  --text-white: #ffffff;
+  
+  /* Background Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-accent: #7a28cb;
+}
