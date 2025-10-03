@@ -83,51 +83,51 @@ export const NFTDetail = ({ nft, provider, onBack }: NFTDetailProps) => {
               <h1 className="text-3xl font-bold text-black mb-4">{nft.name}</h1>
 
               {nft.description && (
-                <p className="text-slate-300 leading-relaxed mb-6">{nft.description}</p>
+                <p className="text-gray-700 leading-relaxed mb-6">{nft.description}</p>
               )}
 
               <div className="grid grid-cols-2 gap-4 mb-6">
-                <div className="bg-slate-900/50 rounded-lg p-4">
-                  <p className="text-slate-500 text-sm mb-1">Token ID</p>
-                  <p className="text-white font-mono">#{nft.tokenId}</p>
+                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                  <p className="text-gray-600 text-sm mb-1">Token ID</p>
+                  <p className="text-black font-mono">#{nft.tokenId}</p>
                 </div>
-                <div className="bg-slate-900/50 rounded-lg p-4">
-                  <p className="text-slate-500 text-sm mb-1">Owner</p>
-                  <p className="text-white font-mono text-sm">
+                <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                  <p className="text-gray-600 text-sm mb-1">Owner</p>
+                  <p className="text-black font-mono text-sm">
                     {nft.owner.slice(0, 6)}...{nft.owner.slice(-4)}
                   </p>
                 </div>
               </div>
 
-              <div className="bg-slate-900/50 rounded-lg p-4">
-                <p className="text-slate-500 text-sm mb-1">Contract Address</p>
-                <p className="text-white font-mono text-xs break-all">{nft.contractAddress}</p>
+              <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
+                <p className="text-gray-600 text-sm mb-1">Contract Address</p>
+                <p className="text-black font-mono text-xs break-all">{nft.contractAddress}</p>
               </div>
             </div>
 
             {nft.attributes && nft.attributes.length > 0 && (
-              <div className="bg-slate-800 rounded-2xl p-6 border border-slate-700">
-                <h2 className="text-xl font-bold text-white mb-4">Attributes</h2>
+              <div className="bg-white rounded-2xl p-6 border border-black">
+                <h2 className="text-xl font-bold text-black mb-4">Attributes</h2>
                 <div className="grid grid-cols-2 gap-3">
                   {nft.attributes.map((attr, index) => (
-                    <div key={index} className="bg-slate-900/50 rounded-lg p-3 text-center">
-                      <p className="text-blue-400 text-xs uppercase mb-1">{attr.trait_type}</p>
-                      <p className="text-white font-semibold">{attr.value}</p>
+                    <div key={index} className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-center">
+                      <p className="text-xs uppercase mb-1" style={{ color: 'var(--primary-violet)' }}>{attr.trait_type}</p>
+                      <p className="text-black font-semibold">{attr.value}</p>
                     </div>
                   ))}
                 </div>
               </div>
             )}
 
-            <div className="bg-slate-800 rounded-2xl p-6 border border-slate-700">
+            <div className="bg-white rounded-2xl p-6 border border-black">
               <div className="flex items-center gap-2 mb-4">
-                <Send className="w-5 h-5 text-blue-400" />
-                <h2 className="text-xl font-bold text-white">Transfer NFT</h2>
+                <Send className="w-5 h-5" style={{ color: 'var(--primary-violet)' }} />
+                <h2 className="text-xl font-bold text-black">Transfer NFT</h2>
               </div>
 
               <div className="space-y-4">
                 <div>
-                  <label className="block text-slate-400 text-sm mb-2">Recipient Address</label>
+                  <label className="block text-black text-sm mb-2">Recipient Address</label>
                   <input
                     type="text"
                     value={recipientAddress}
@@ -137,34 +137,44 @@ export const NFTDetail = ({ nft, provider, onBack }: NFTDetailProps) => {
                       setTransferError('');
                     }}
                     placeholder="0x..."
-                    className="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3
-                             text-white placeholder-slate-600 focus:outline-none focus:border-blue-500
-                             transition-colors font-mono text-sm"
+                    className="w-full bg-white border border-black rounded-lg px-4 py-3
+                             text-black placeholder-gray-400 transition-colors font-mono text-sm"
+                    style={{
+                      borderColor: 'black'
+                    }}
+                    onFocus={(e) => {
+                      e.target.style.borderColor = 'var(--primary-violet)';
+                      e.target.style.boxShadow = '0 0 0 2px rgba(122, 40, 203, 0.2)';
+                    }}
+                    onBlur={(e) => {
+                      e.target.style.borderColor = 'black';
+                      e.target.style.boxShadow = 'none';
+                    }}
                     disabled={isTransferring}
                   />
                 </div>
 
                 {transferStatus === 'success' && (
-                  <div className="flex items-center gap-2 p-4 bg-green-500/10 border border-green-500/50 rounded-lg">
-                    <CheckCircle2 className="w-5 h-5 text-green-400 flex-shrink-0" />
-                    <p className="text-green-400 text-sm">Transfer successful!</p>
+                  <div className="flex items-center gap-2 p-4 bg-green-50 border border-green-400 rounded-lg">
+                    <CheckCircle2 className="w-5 h-5 text-green-600 flex-shrink-0" />
+                    <p className="text-green-600 text-sm">Transfer successful!</p>
                   </div>
                 )}
 
                 {transferStatus === 'error' && (
-                  <div className="flex items-center gap-2 p-4 bg-red-500/10 border border-red-500/50 rounded-lg">
-                    <XCircle className="w-5 h-5 text-red-400 flex-shrink-0" />
-                    <p className="text-red-400 text-sm">{transferError || 'Transfer failed'}</p>
+                  <div className="flex items-center gap-2 p-4 bg-red-50 border border-red-400 rounded-lg">
+                    <XCircle className="w-5 h-5 text-red-600 flex-shrink-0" />
+                    <p className="text-red-600 text-sm">{transferError || 'Transfer failed'}</p>
                   </div>
                 )}
 
                 <button
                   onClick={handleTransfer}
                   disabled={isTransferring || !recipientAddress}
-                  className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600
-                           text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200
+                  className="w-full text-white font-semibold py-3 px-6 rounded-lg transition-all duration-200
                            disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-[1.02] active:scale-[0.98]
                            flex items-center justify-center gap-2"
+                  style={{ background: isTransferring || !recipientAddress ? '#666666' : 'var(--primary-violet)' }}
                 >
                   {isTransferring ? (
                     <>
@@ -179,7 +189,7 @@ export const NFTDetail = ({ nft, provider, onBack }: NFTDetailProps) => {
                   )}
                 </button>
 
-                <p className="text-xs text-slate-500 text-center">
+                <p className="text-xs text-gray-600 text-center">
                   This action will transfer the NFT to the specified address. Make sure the address is correct.
                 </p>
               </div>
